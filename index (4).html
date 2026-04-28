@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ecowork — Community Action Network</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ── TOPBAR ── -->
+<div class="topbar">
+  <div class="topbar-item">
+    🌍
+    <select class="lang-select" id="langSelect" onchange="setLanguage(this.value)">
+      <option value="en">English</option>
+      <option value="hi">हिन्दी (Hindi)</option>
+      <option value="ta">தமிழ் (Tamil)</option>
+      <option value="ur">اردو (Urdu)</option>
+      <option value="te">తెలుగు (Telugu)</option>
+      <option value="bn">বাংলা (Bengali)</option>
+      <option value="mr">मराठी (Marathi)</option>
+      <option value="gu">ગુજરાતી (Gujarati)</option>
+      <option value="kn">ಕನ್ನಡ (Kannada)</option>
+      <option value="ml">മലയാളം (Malayalam)</option>
+      <option value="pa">ਪੰਜਾਬੀ (Punjabi)</option>
+      <option value="or">ଓଡ଼ିଆ (Odia)</option>
+    </select>
+  </div>
+  <button class="login-btn-top" id="loginBtnTop" onclick="openLogin()">
+    <span>👤</span> <span data-t="login">Login / Sign Up</span>
+  </button>
+  <div class="user-badge" id="userBadge">
+    <div class="avatar" id="userAvatar">U</div>
+    <span id="userNameDisplay">User</span>
+    <button class="logout-btn" onclick="logout()">✕</button>
+  </div>
+</div>
+
+<!-- ── HEADER ── -->
+<header>
+  <a class="logo" href="#">
+    <div class="logo-icon">🌿</div>
+    <div class="logo-text">Eco<span>work</span></div>
+  </a>
+  <nav>
+    <a href="#" data-t="nav_home">Home</a>
+    <a href="#records" data-t="nav_issues">Issues</a>
+    <a href="#volunteer-section" data-t="nav_volunteer">Volunteer</a>
+    <a href="#volunteer-section" class="nav-vol" data-t="nav_register">Register as Volunteer</a>
+  </nav>
+</header>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg-circle c1"></div>
+  <div class="hero-bg-circle c2"></div>
+
+  <div class="hero-left">
+    <div class="tag-pill">🌱 <span data-t="hero_tag">Community Action Network</span></div>
+    <h1 class="hero-title">
+      <span data-t="hero_title_1">Connecting</span><br>
+      <span class="accent" data-t="hero_title_2">communities</span> <span data-t="hero_title_3">with</span><br>
+      <span data-t="hero_title_4">urgent local needs</span>
+    </h1>
+    <p class="hero-desc" data-t="hero_desc">
+      Ecowork gathers scattered community information into one clear picture — revealing the most pressing local needs and instantly matching them with available volunteers who can make a real difference on the ground. Whether it's a broken water pipe, unsafe roads, health crises, or environmental hazards — every issue reported helps build a stronger, more responsive community. Together, we don't just identify problems; we solve them.
+    </p>
+    <div class="stats-row">
+      <div class="stat"><span class="stat-num" id="totalCount">0</span><span class="stat-label" data-t="stat_issues">Issues Reported</span></div>
+      <div class="stat"><span class="stat-num" id="volCount">0</span><span class="stat-label" data-t="stat_volunteers">Active Volunteers</span></div>
+      <div class="stat"><span class="stat-num">18</span><span class="stat-label" data-t="stat_areas">Areas Covered</span></div>
+    </div>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="openIssueModal()">🔎 <span data-t="btn_view_issues">View Active Issues</span></button>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="panel-header">
+      <h2 data-t="panel_title">Report an Issue</h2>
+      <p data-t="panel_sub">Help your community by flagging urgent local needs so the right volunteers can respond fast.</p>
+    </div>
+    <button class="submit-issue-btn" onclick="openIssueModal()">
+      <span>📋</span> <span data-t="submit_issue_btn">Submit Issue Report</span>
+    </button>
+    <div class="live-feed">
+      <div class="feed-label" data-t="live_feed_label">Live Community Feed</div>
+      <div id="liveFeed">
+        <div class="feed-card"><div class="feed-icon icon-red">🚰</div><div class="feed-info"><div class="feed-title">Broken water pipe flooding road</div><div class="feed-meta">Sigra, Varanasi · 20 min ago</div></div><div class="urgency-badge badge-high">HIGH</div></div>
+        <div class="feed-card"><div class="feed-icon icon-orange">🗑️</div><div class="feed-info"><div class="feed-title">Garbage pile-up near school</div><div class="feed-meta">Lanka, Varanasi · 1 hr ago</div></div><div class="urgency-badge badge-med">MED</div></div>
+        <div class="feed-card"><div class="feed-icon icon-orange">⚡</div><div class="feed-info"><div class="feed-title">Street lights out for 3 days</div><div class="feed-meta">Godowlia, Varanasi · 3 hr ago</div></div><div class="urgency-badge badge-med">MED</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── VOLUNTEER SECTION ── -->
+<section class="volunteer-section" id="volunteer-section">
+  <div class="vol-inner">
+    <!-- QUOTES COL -->
+    <div class="quotes-col">
+      <div>
+        <div class="vol-section-tag">✨ The Spirit of Service</div>
+        <h2 class="vol-title">Be the <em>change</em><br>your community<br>needs</h2>
+        <p class="vol-intro">Volunteering is more than giving time — it is an act of love for the place you call home. Every hour you spend helping a neighbour, cleaning a street, or guiding a family in need echoes far beyond what the eye can see.</p>
+      </div>
+      <div class="quote-card">
+        <p class="quote-text">The best way to find yourself is to lose yourself in the service of others.</p>
+        <p class="quote-author">— Mahatma Gandhi</p>
+      </div>
+      <div class="quote-card">
+        <p class="quote-text">Volunteers don't necessarily have the time; they just have the heart.</p>
+        <p class="quote-author">— Elizabeth Andrew</p>
+      </div>
+      <div class="quote-card">
+        <p class="quote-text">No one has ever become poor by giving. Every act of service plants a seed of hope.</p>
+        <p class="quote-author">— Anne Frank</p>
+      </div>
+      <p class="vol-mini-para">
+        In India alone, millions of unsung heroes step forward every day — from cleaning river ghats to teaching underprivileged children, from planting trees to assisting flood victims. Ecowork exists to channel this boundless energy where it matters most. When you register as a volunteer, you become a part of something permanent. Your name, your work, your dedication — recorded and recognised forever in your community's story.
+      </p>
+    </div>
+
+    <!-- REG PANEL -->
+    <div class="reg-panel">
+      <div class="reg-panel-tag">🤝 Join the Network</div>
+      <h3 class="reg-panel-title" data-t="reg_title">Register as Volunteer</h3>
+      <p class="reg-panel-desc" data-t="reg_desc">Join thousands of community heroes. Get matched to issues near you and track your real-world impact.</p>
+      <div class="perks">
+        <div class="perk"><div class="perk-icon">📍</div> Matched to issues in your local area</div>
+        <div class="perk"><div class="perk-icon">📊</div> Track your community impact dashboard</div>
+        <div class="perk"><div class="perk-icon">🏅</div> Earn community recognition badges</div>
+        <div class="perk"><div class="perk-icon">📞</div> Direct contact with issue reporters</div>
+        <div class="perk"><div class="perk-icon">🔔</div> Real-time alerts for urgent local needs</div>
+      </div>
+      <button class="reg-vol-btn" onclick="openVolModal()">
+        🙋 <span data-t="reg_btn">Register as Volunteer</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ── ISSUES DASHBOARD ── -->
+<section class="records-section" id="records">
+  <div class="sec-tag">Community Dashboard</div>
+  <h2 class="sec-title" data-t="dash_title">Submitted Issues</h2>
+  <p class="sec-sub" data-t="dash_sub">All reported issues — visible to matched volunteers in real-time. Volunteers can update progress.</p>
+  <div class="records-grid" id="recordsGrid">
+    <div class="empty-state"><div class="empty-icon">📭</div><p>No issues yet. Be the first to report a community need.</p></div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p>© 2026 <strong>Ecowork</strong> — Community Action Network &nbsp;·&nbsp; Building stronger communities together 🌿</p>
+</footer>
+
+<!-- ══ MODALS ══ -->
+
+<!-- LOGIN MODAL -->
+<div class="modal-overlay" id="loginModal" onclick="closeIfOverlay(event,'loginModal')">
+  <div class="modal">
+    <div class="login-modal-body">
+      <button class="modal-close" style="position:absolute;top:20px;right:20px;background:rgba(45,90,61,0.1);color:var(--forest)" onclick="closeModal('loginModal')">✕</button>
+      <div style="font-size:48px;margin-bottom:20px;text-align:center">🌿</div>
+      <h2 class="login-title" style="text-align:center">Welcome to Ecowork</h2>
+      <p class="login-sub" style="text-align:center">Sign in to report issues, track progress,<br>and connect with your community.</p>
+      <div class="form-group">
+        <label>Gmail Address <span>*</span></label>
+        <input type="email" id="loginEmail" placeholder="yourname@gmail.com">
+      </div>
+      <div class="form-group">
+        <label>Select Your Language</label>
+        <select id="loginLang" onchange="setLanguage(this.value);document.getElementById('langSelect').value=this.value">
+          <option value="en">English</option>
+          <option value="hi">हिन्दी (Hindi)</option>
+          <option value="ta">தமிழ் (Tamil)</option>
+          <option value="ur">اردو (Urdu)</option>
+          <option value="te">తెలుగు (Telugu)</option>
+          <option value="bn">বাংলা (Bengali)</option>
+          <option value="mr">मराठी (Marathi)</option>
+          <option value="gu">ગુજરાતી (Gujarati)</option>
+          <option value="kn">ಕನ್ನಡ (Kannada)</option>
+          <option value="ml">മലയാളം (Malayalam)</option>
+          <option value="pa">ਪੰਜਾਬੀ (Punjabi)</option>
+          <option value="or">ଓଡ଼ିଆ (Odia)</option>
+        </select>
+      </div>
+      <div id="loginError" class="form-error"></div>
+      <button class="gmail-btn" onclick="doLogin()">
+        <svg class="gmail-logo" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 24l-24-18v36h48V6z"/><path fill="#FBBC05" d="M0 42l18-18"/><path fill="#34A853" d="M48 42L30 24"/><path fill="#4285F4" d="M0 6l24 18L48 6H0z"/></svg>
+        Continue with Gmail
+      </button>
+      <p class="login-note">By continuing, you agree to Ecowork's community guidelines. Your data stays private and is never shared.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ISSUE SUBMIT MODAL -->
+<div class="modal-overlay" id="issueModal" onclick="closeIfOverlay(event,'issueModal')">
+  <div class="modal">
+    <div id="issueFormView">
+      <div class="modal-top">
+        <button class="modal-close" onclick="closeModal('issueModal')">✕</button>
+        <div class="modal-title">📋 <span data-t="issue_modal_title">Submit a Community Issue</span></div>
+        <div class="modal-subtitle" data-t="issue_modal_sub">Your report connects the right volunteer to the right place.</div>
+      </div>
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="form-group"><label data-t="lbl_name">Full Name <span>*</span></label><input type="text" id="iName" placeholder="e.g. Rahul Sharma"></div>
+          <div class="form-group"><label data-t="lbl_contact">Contact Number <span>*</span></label><input type="tel" id="iContact" placeholder="+91 98765 43210"></div>
+        </div>
+        <div class="form-group">
+          <label data-t="lbl_gender">Gender <span>*</span></label>
+          <div class="radio-group">
+            <label class="radio-opt"><input type="radio" name="igender" value="Male">👨 <span data-t="male">Male</span></label>
+            <label class="radio-opt"><input type="radio" name="igender" value="Female">👩 <span data-t="female">Female</span></label>
+            <label class="radio-opt"><input type="radio" name="igender" value="Other">🧑 <span data-t="other">Other</span></label>
+          </div>
+        </div>
+        <hr class="divider">
+        <div class="form-group"><label data-t="lbl_address">Address / Location <span>*</span></label><input type="text" id="iAddress" placeholder="e.g. Near Ram Nagar Bridge, Varanasi"></div>
+        <div class="form-group">
+          <label data-t="lbl_issue_type">Issue Type <span>*</span></label>
+          <select id="iType">
+            <option value="" disabled selected>— Select category —</option>
+            <option value="Infrastructure">🏗️ Infrastructure</option>
+            <option value="Sanitation">🗑️ Sanitation & Waste</option>
+            <option value="Safety">🚨 Safety & Security</option>
+            <option value="Health">🏥 Health & Medical</option>
+            <option value="Environment">🌿 Environment & Pollution</option>
+            <option value="Water">🚰 Water & Drainage</option>
+            <option value="Electricity">⚡ Electricity & Lighting</option>
+            <option value="Other">📌 Other</option>
+          </select>
+        </div>
+        <div class="form-group"><label data-t="lbl_desc">Description <span>*</span></label><textarea id="iDesc" placeholder="Describe the issue — what you see, how long it's been happening, who is affected…"></textarea></div>
+        <div id="issueError" class="form-error"></div>
+        <button class="submit-btn" onclick="submitIssue()">✅ &nbsp;<span data-t="submit_btn">Submit Issue Report</span></button>
+      </div>
+    </div>
+    <div class="success-view" id="issueSuccess">
+      <div class="success-icon">✅</div>
+      <h3 data-t="success_title">Issue Reported!</h3>
+      <p data-t="success_msg">Your issue has been logged. Volunteers in your area will be notified and can contact you.</p>
+      <div class="success-ref" id="issueRef">Reference: ECO-0001</div>
+      <button class="submit-btn" style="max-width:200px" onclick="closeModal('issueModal')">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- VOLUNTEER REGISTER MODAL -->
+<div class="modal-overlay" id="volModal" onclick="closeIfOverlay(event,'volModal')">
+  <div class="modal wide">
+    <div id="volFormView">
+      <div class="modal-top">
+        <button class="modal-close" onclick="closeModal('volModal')">✕</button>
+        <div class="modal-title">🙋 Register as Volunteer</div>
+        <div class="modal-subtitle">Join the Ecowork network and start making a difference today.</div>
+      </div>
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="form-group"><label>Full Name <span>*</span></label><input type="text" id="vName" placeholder="Your full name"></div>
+          <div class="form-group"><label>Contact Number <span>*</span></label><input type="tel" id="vContact" placeholder="+91 98765 43210"></div>
+        </div>
+        <div class="form-group">
+          <label>Gender <span>*</span></label>
+          <div class="radio-group">
+            <label class="radio-opt"><input type="radio" name="vgender" value="Male">👨 Male</label>
+            <label class="radio-opt"><input type="radio" name="vgender" value="Female">👩 Female</label>
+            <label class="radio-opt"><input type="radio" name="vgender" value="Other">🧑 Other</label>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Community / Area Name <span>*</span></label><input type="text" id="vCommunity" placeholder="e.g. Sigra, Varanasi"></div>
+          <div class="form-group"><label>Availability</label>
+            <select id="vAvail">
+              <option value="Weekends">Weekends only</option>
+              <option value="Weekdays">Weekdays only</option>
+              <option value="Anytime" selected>Anytime</option>
+              <option value="Evenings">Evenings only</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group"><label>Tell Us About Your Work <span>*</span></label><textarea id="vWork" placeholder="Describe your skills, past volunteer work, and what type of issues you want to help with…"></textarea></div>
+        <hr class="divider">
+        <div class="form-group">
+          <label>Upload Your ID Card <span>*</span> <span style="color:var(--muted);font-weight:400">(Aadhaar / Voter / Govt. ID)</span></label>
+          <div class="upload-zone" id="uploadZone">
+            <input type="file" id="vIdFile" accept="image/*,.pdf" onchange="handleFileUpload(event)">
+            <div class="upload-icon">🪪</div>
+            <div class="upload-text">Click or drag your ID card here</div>
+            <div class="upload-sub">Aadhaar Card, Voter ID, Passport, or any Govt. ID • Max 5MB</div>
+          </div>
+          <div class="upload-preview" id="uploadPreview">
+            <img id="previewImg" src="" alt="ID preview">
+            <div class="upload-preview-info">
+              <div class="upload-preview-name" id="previewName">—</div>
+              <div class="upload-preview-size" id="previewSize">—</div>
+            </div>
+            <span style="font-size:18px;cursor:pointer" onclick="clearFile()">🗑️</span>
+          </div>
+          <div class="ai-check" id="aiCheck">
+            <div class="spinner"></div>
+            <span>🤖 AI is verifying your ID card authenticity…</span>
+          </div>
+          <div class="ai-result" id="aiResult"></div>
+        </div>
+        <div id="volError" class="form-error"></div>
+        <button class="submit-btn" onclick="submitVolunteer()" id="volSubmitBtn">🙋 &nbsp;Complete Registration</button>
+      </div>
+    </div>
+    <div class="success-view" id="volSuccess">
+      <div class="success-icon">🌟</div>
+      <h3>Welcome to Ecowork!</h3>
+      <p>Your volunteer profile has been verified and activated. You can now view and respond to community issues in your area.</p>
+      <div class="success-ref" id="volRef">Volunteer ID: VOL-0001</div>
+      <button class="submit-btn" style="max-width:240px" onclick="closeModal('volModal');openVolDashboard()">View Community Issues →</button>
+    </div>
+  </div>
+</div>
+
+<!-- VOLUNTEER DASHBOARD MODAL -->
+<div class="modal-overlay" id="volDashModal" onclick="closeIfOverlay(event,'volDashModal')">
+  <div class="modal wide">
+    <div class="modal-top">
+      <button class="modal-close" onclick="closeModal('volDashModal')">✕</button>
+      <div class="modal-title">🗺️ Community Issues Dashboard</div>
+      <div class="modal-subtitle">Browse open issues in your area — contact reporters and update progress.</div>
+    </div>
+    <div class="vol-dashboard">
+      <div class="vol-dash-header">
+        <h3 class="vol-dash-title">Open Issues</h3>
+        <div class="vol-filter">
+          <button class="filter-btn active" onclick="filterIssues('all',this)">All</button>
+          <button class="filter-btn" onclick="filterIssues('pending',this)">🟠 Pending</button>
+          <button class="filter-btn" onclick="filterIssues('working',this)">🔵 Working</button>
+          <button class="filter-btn" onclick="filterIssues('resolved',this)">🟢 Resolved</button>
+        </div>
+      </div>
+      <div id="volIssuesList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- PROGRESS UPDATE MODAL -->
+<div class="modal-overlay" id="progressModal" onclick="closeIfOverlay(event,'progressModal')">
+  <div class="modal" style="max-width:440px">
+    <div class="modal-top">
+      <button class="modal-close" onclick="closeModal('progressModal')">✕</button>
+      <div class="modal-title">📊 Update Issue Progress</div>
+      <div class="modal-subtitle" id="progressIssueTitle">—</div>
+    </div>
+    <div class="modal-body">
+      <div class="form-group"><label>Current Status</label>
+        <div class="radio-group" style="flex-direction:column;gap:10px">
+          <label class="radio-opt" style="justify-content:flex-start"><input type="radio" name="pstatus" value="pending">🟠 &nbsp;Pending — Not yet started</label>
+          <label class="radio-opt" style="justify-content:flex-start"><input type="radio" name="pstatus" value="working">🔵 &nbsp;Working — Actively being addressed</label>
+          <label class="radio-opt" style="justify-content:flex-start"><input type="radio" name="pstatus" value="resolved">🟢 &nbsp;Resolved — Issue fully resolved</label>
+        </div>
+      </div>
+      <div class="form-group"><label>Volunteer Note (optional)</label><textarea id="progressNote" placeholder="Add a note about the work done or current situation…"></textarea></div>
+      <input type="hidden" id="progressIssueId">
+      <button class="submit-btn" onclick="saveProgress()">💾 &nbsp;Save Progress Update</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
